@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_application/constants/global_variables.dart';
+import 'package:flutter_ecommerce_application/features/auth/screens/auth_screen.dart';
+import 'package:flutter_ecommerce_application/providers/user_provider.dart';
+import 'package:flutter_ecommerce_application/router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => UserProvider(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +39,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Scaffold(),
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: const AuthScreen(),
     );
   }
 }
