@@ -2,6 +2,7 @@ import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_application/constants/global_variables.dart';
 import 'package:flutter_ecommerce_application/features/account/screens/account_screen.dart';
+import 'package:flutter_ecommerce_application/features/cart/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_application/features/home/screens/home_screen.dart';
 import 'package:flutter_ecommerce_application/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +23,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    Scaffold(),
-    // const CartScreen(),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -34,8 +34,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    final userCartLen = 4;
-    // context.watch<UserProvider>().user.cart.length;
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
 
     return Scaffold(
       body: pages[_page],

@@ -1,9 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_application/common/widgets/custom_button.dart';
+import 'package:flutter_ecommerce_application/common/widgets/stars.dart';
 import 'package:flutter_ecommerce_application/constants/global_variables.dart';
+import 'package:flutter_ecommerce_application/features/product_details/services/product_details_services.dart';
+import 'package:flutter_ecommerce_application/features/search/screens/search_screen.dart';
 import 'package:flutter_ecommerce_application/models/product.dart';
-import 'package:flutter_ecommerce_application/product_details/services/product_details_services.dart';
 import 'package:flutter_ecommerce_application/providers/user_provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:provider/provider.dart';
 
@@ -43,7 +47,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   void navigateToSearchScreen(String query) {
-    // Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
   void addToCart() {
@@ -140,9 +144,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Text(
                     widget.product.id!,
                   ),
-                  // Stars(
-                  //   rating: avgRating,
-                  // ),
+                  Stars(
+                    rating: avgRating,
+                  ),
                 ],
               ),
             ),
@@ -158,23 +162,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
               ),
             ),
-            // CarouselSlider(
-            //   items: widget.product.images.map(
-            //     (i) {
-            //       return Builder(
-            //         builder: (BuildContext context) => Image.network(
-            //           i,
-            //           fit: BoxFit.contain,
-            //           height: 200,
-            //         ),
-            //       );
-            //     },
-            //   ).toList(),
-            //   options: CarouselOptions(
-            //     viewportFraction: 1,
-            //     height: 300,
-            //   ),
-            // ),
+            CarouselSlider(
+              items: widget.product.images.map(
+                (i) {
+                  return Builder(
+                    builder: (BuildContext context) => Image.network(
+                      i,
+                      fit: BoxFit.contain,
+                      height: 200,
+                    ),
+                  );
+                },
+              ).toList(),
+              options: CarouselOptions(
+                viewportFraction: 1,
+                height: 300,
+              ),
+            ),
             Container(
               color: Colors.black12,
               height: 5,
@@ -241,25 +245,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
               ),
             ),
-            // RatingBar.builder(
-            //   initialRating: myRating,
-            //   minRating: 1,
-            //   direction: Axis.horizontal,
-            //   allowHalfRating: true,
-            //   itemCount: 5,
-            //   itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-            //   itemBuilder: (context, _) => const Icon(
-            //     Icons.star,
-            //     color: GlobalVariables.secondaryColor,
-            //   ),
-            //   onRatingUpdate: (rating) {
-            //     productDetailsServices.rateProduct(
-            //       context: context,
-            //       product: widget.product,
-            //       rating: rating,
-            //     );
-            //   },
-            // )
+            RatingBar.builder(
+              initialRating: myRating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: GlobalVariables.secondaryColor,
+              ),
+              onRatingUpdate: (rating) {
+                productDetailsServices.rateProduct(
+                  context: context,
+                  product: widget.product,
+                  rating: rating,
+                );
+              },
+            )
           ],
         ),
       ),

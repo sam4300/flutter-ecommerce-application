@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_application/common/widgets/loader.dart';
 import 'package:flutter_ecommerce_application/features/admin/models/sales.dart';
 import 'package:flutter_ecommerce_application/features/admin/services/admin_services.dart';
-import 'package:flutter_ecommerce_application/features/admin/widgets/category_products_chart.dart';
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({Key? key}) : super(key: key);

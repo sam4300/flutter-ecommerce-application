@@ -79,7 +79,7 @@ class _PostsScreenState extends State<PostsScreen> {
                     ),
                   ],
                 );
-              
+              },
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: navigateToAddProduct,

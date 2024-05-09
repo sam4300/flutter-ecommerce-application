@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_application/common/widgets/loader.dart';
+import 'package:flutter_ecommerce_application/features/home/services/home_services.dart';
+import 'package:flutter_ecommerce_application/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter_ecommerce_application/models/product.dart';
-import 'package:flutter_ecommerce_application/product_details/screens/product_details_screen.dart';
 
 class DealOfDay extends StatefulWidget {
-  const DealOfDay({Key? key}) : super(key: key);
+  const DealOfDay({super.key});
 
   @override
   State<DealOfDay> createState() => _DealOfDayState();
@@ -12,7 +13,7 @@ class DealOfDay extends StatefulWidget {
 
 class _DealOfDayState extends State<DealOfDay> {
   Product? product;
-  // final HomeServices homeServices = HomeServices();
+  final HomeServices homeServices = HomeServices();
 
   @override
   void initState() {
@@ -21,7 +22,7 @@ class _DealOfDayState extends State<DealOfDay> {
   }
 
   void fetchDealOfDay() async {
-    // product = await homeServices.fetchDealOfDay(context: context);
+    product = await homeServices.fetchDealOfDay(context: context);
     setState(() {});
   }
 
@@ -59,17 +60,17 @@ class _DealOfDayState extends State<DealOfDay> {
                     Container(
                       padding: const EdgeInsets.only(left: 15),
                       alignment: Alignment.topLeft,
-                      child: const Text(
-                        '\$100',
-                        style: TextStyle(fontSize: 18),
+                      child: Text(
+                        '\$${product!.price}',
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ),
                     Container(
                       alignment: Alignment.topLeft,
                       padding:
                           const EdgeInsets.only(left: 15, top: 5, right: 40),
-                      child: const Text(
-                        'Rivaan',
+                      child: Text(
+                        product!.name,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
